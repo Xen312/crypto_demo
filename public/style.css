@@ -750,3 +750,22 @@ input {
   .back-btn { display: none; }
   .mobile-nav { display: none !important; }
 }
+
+/* Sign in button */
+.signin-btn {
+  display: block;
+  width: 100%;
+  padding: 11px;
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  transition: background 0.15s;
+}
+
+.signin-btn:hover {
+  background: var(--accent-hover);
+}

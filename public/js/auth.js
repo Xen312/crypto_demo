@@ -1,12 +1,16 @@
 /* ==================================================
    AUTH & SESSION
+   
+   No Google popup or GSI script needed anymore.
+   Sign-in is handled entirely server-side via redirect
+   (/auth/google/redirect → Google → /auth/google/callback).
+   This works on every browser and every mobile device.
 ================================================== */
 
 export let currentUser = null;
 
 const loginScreen = document.getElementById("login-screen");
 const appEl       = document.getElementById("app");
-const logoutBtn   = document.getElementById("logoutBtn");
 const myPic       = document.getElementById("myPic");
 const myName      = document.getElementById("myName");
 
@@ -34,18 +38,6 @@ function showLogin() {
   appEl.classList.add("hidden");
 }
 
-window.handleGoogleCredential = async function (response) {
-  const res = await fetch("/auth/google", {
-    method:  "POST",
-    headers: { "Content-Type": "application/json" },
-    body:    JSON.stringify({ credential: response.credential }),
-    credentials: "include",
-  });
-
-  if (!res.ok) { console.error("Auth failed"); return; }
-  location.reload();
-};
-
-logoutBtn?.addEventListener("click", () => {
+document.getElementById("logoutBtn")?.addEventListener("click", () => {
   location.href = "/auth/logout";
 });
