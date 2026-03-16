@@ -1,0 +1,752 @@
+/* ==========================================================
+   HYBRIDSECURE — STYLES
+   Minimalist, clean, mobile-first
+========================================================== */
+
+/* --- Reset & base --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg:          #f5f6f8;
+  --surface:     #ffffff;
+  --border:      #e4e6ea;
+  --text-1:      #111827;
+  --text-2:      #6b7280;
+  --accent:      #2563eb;
+  --accent-hover:#1d4ed8;
+  --danger:      #dc2626;
+  --sent-bg:     #2563eb;
+  --sent-text:   #ffffff;
+  --recv-bg:     #ffffff;
+
+  --lab-bg:      #0d1117;
+  --lab-surface: #161b22;
+  --lab-border:  #21262d;
+  --lab-text-1:  #e6edf3;
+  --lab-text-2:  #8b949e;
+  --lab-green:   #3fb950;
+  --lab-blue:    #58a6ff;
+  --lab-orange:  #d29922;
+  --lab-purple:  #bc8cff;
+  --lab-red:     #f85149;
+
+  --radius:      8px;
+  --radius-sm:   5px;
+  --font:        -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-mono:   "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+html, body {
+  height: 100%;
+  font-family: var(--font);
+  font-size: 14px;
+  color: var(--text-1);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font-family: var(--font);
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+input {
+  font-family: var(--font);
+  font-size: 14px;
+}
+
+.hidden { display: none !important; }
+
+/* ==========================================================
+   LOGIN
+========================================================== */
+.login-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  padding: 24px;
+}
+
+.login-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 40px 36px;
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.login-logo {
+  width: 48px;
+  height: 48px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.login-title {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  margin-bottom: 6px;
+}
+
+.login-sub {
+  font-size: 13px;
+  color: var(--text-2);
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+#g_id_onload {
+  display: flex;
+  justify-content: center;
+}
+
+/* ==========================================================
+   APP LAYOUT — desktop 3-column
+========================================================== */
+.app {
+  display: grid;
+  grid-template-columns: 240px 1fr 340px;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ==========================================================
+   SIDEBAR
+========================================================== */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.sidebar-top {
+  padding: 14px 12px 10px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.sidebar-me {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.sidebar-me-name {
+  font-size: 13px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.search-input {
+  width: 100%;
+  padding: 7px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  color: var(--text-1);
+  background: var(--bg);
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.search-input:focus {
+  border-color: var(--accent);
+}
+
+.user-list {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.user-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.1s;
+}
+
+.user-item:hover {
+  background: var(--bg);
+}
+
+.user-item span {
+  font-size: 13px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.logout-btn {
+  padding: 12px;
+  font-size: 13px;
+  color: var(--text-2);
+  border-top: 1px solid var(--border);
+  text-align: center;
+  transition: background 0.1s, color 0.1s;
+  flex-shrink: 0;
+}
+
+.logout-btn:hover {
+  background: var(--bg);
+  color: var(--danger);
+}
+
+/* ==========================================================
+   AVATARS
+========================================================== */
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: var(--border);
+}
+
+.avatar-sm {
+  width: 28px;
+  height: 28px;
+}
+
+/* ==========================================================
+   CHAT PANEL
+========================================================== */
+.chat-panel {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.back-btn {
+  display: none;
+  color: var(--text-2);
+  padding: 4px;
+  border-radius: var(--radius-sm);
+  line-height: 0;
+  transition: color 0.1s, background 0.1s;
+}
+
+.back-btn:hover {
+  color: var(--text-1);
+  background: var(--bg);
+}
+
+.chat-name {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.toggle-lab-btn {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-2);
+  padding: 5px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  transition: all 0.1s;
+  white-space: nowrap;
+}
+
+.toggle-lab-btn:hover,
+.toggle-lab-btn.active {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: #eff6ff;
+}
+
+/* Messages */
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.bubble {
+  max-width: 68%;
+  align-self: flex-start;
+  background: var(--recv-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px 12px 12px 3px;
+  padding: 8px 12px;
+  word-break: break-word;
+}
+
+.bubble.mine {
+  align-self: flex-end;
+  background: var(--sent-bg);
+  border-color: var(--sent-bg);
+  border-radius: 12px 12px 3px 12px;
+  color: var(--sent-text);
+}
+
+.bubble-name {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-2);
+  margin-bottom: 3px;
+}
+
+.bubble.mine .bubble-name {
+  color: rgba(255,255,255,0.7);
+}
+
+.bubble-text {
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.bubble-time {
+  font-size: 10px;
+  color: var(--text-2);
+  margin-top: 4px;
+  text-align: right;
+}
+
+.bubble.mine .bubble-time {
+  color: rgba(255,255,255,0.6);
+}
+
+
+
+/* Composer */
+.composer {
+  display: flex;
+  gap: 8px;
+  padding: 10px 14px;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.composer-input {
+  flex: 1;
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--text-1);
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.composer-input:focus {
+  border-color: var(--accent);
+  background: var(--surface);
+}
+
+.send-btn {
+  padding: 9px 18px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+
+.send-btn:hover {
+  background: var(--accent-hover);
+}
+
+/* ==========================================================
+   CRYPTO LAB PANEL
+========================================================== */
+.crypto-lab {
+  display: flex;
+  flex-direction: column;
+  background: var(--lab-bg);
+  border-left: 1px solid var(--lab-border);
+  overflow: hidden;
+  transition: width 0.2s ease;
+}
+
+.crypto-lab.lab-hidden {
+  width: 0;
+  border-left: none;
+  overflow: hidden;
+}
+
+.app.lab-hidden {
+  grid-template-columns: 240px 1fr 0;
+}
+
+.lab-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--lab-border);
+  flex-shrink: 0;
+}
+
+.lab-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--lab-text-2);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.close-lab-btn {
+  color: var(--lab-text-2);
+  line-height: 0;
+  padding: 3px;
+  border-radius: 4px;
+  transition: color 0.1s, background 0.1s;
+}
+
+.close-lab-btn:hover {
+  color: var(--lab-text-1);
+  background: var(--lab-surface);
+}
+
+.lab-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.lab-body::-webkit-scrollbar { width: 4px; }
+.lab-body::-webkit-scrollbar-track { background: transparent; }
+.lab-body::-webkit-scrollbar-thumb { background: var(--lab-border); border-radius: 4px; }
+
+/* Placeholder */
+.lab-placeholder {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 12px;
+  padding: 32px 16px;
+  color: var(--lab-text-2);
+}
+
+.lab-placeholder-icon {
+  opacity: 0.3;
+}
+
+.lab-placeholder p {
+  font-size: 13px;
+  line-height: 1.5;
+  max-width: 220px;
+}
+
+/* Steps */
+.lab-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.lab-step {
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid transparent;
+}
+
+.lab-step-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+}
+
+.lab-step-num {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  flex-shrink: 0;
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+}
+
+.lab-step-labels {
+  flex: 1;
+  min-width: 0;
+}
+
+.lab-step-name {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--lab-text-1);
+}
+
+.lab-step-desc {
+  display: block;
+  font-size: 10px;
+  color: var(--lab-text-2);
+  margin-top: 1px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lab-step-value {
+  padding: 5px 10px 8px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1.5;
+  word-break: break-all;
+  color: rgba(230,237,243,0.75);
+  background: rgba(0,0,0,0.25);
+}
+
+/* Step colour variants */
+.step-green  { background: rgba(63,185,80,0.08);   border-color: rgba(63,185,80,0.2);   }
+.step-blue   { background: rgba(88,166,255,0.08);  border-color: rgba(88,166,255,0.2);  }
+.step-orange { background: rgba(210,153,34,0.08);  border-color: rgba(210,153,34,0.2);  }
+.step-purple { background: rgba(188,140,255,0.08); border-color: rgba(188,140,255,0.2); }
+.step-red    { background: rgba(248,81,73,0.08);   border-color: rgba(248,81,73,0.2);   }
+
+.step-green  .lab-step-header { background: rgba(63,185,80,0.12);   }
+.step-blue   .lab-step-header { background: rgba(88,166,255,0.12);  }
+.step-orange .lab-step-header { background: rgba(210,153,34,0.12);  }
+.step-purple .lab-step-header { background: rgba(188,140,255,0.12); }
+.step-red    .lab-step-header { background: rgba(248,81,73,0.12);   }
+
+.step-green  .lab-step-num { color: var(--lab-green);  }
+.step-blue   .lab-step-num { color: var(--lab-blue);   }
+.step-orange .lab-step-num { color: var(--lab-orange); }
+.step-purple .lab-step-num { color: var(--lab-purple); }
+.step-red    .lab-step-num { color: var(--lab-red);    }
+
+/* Section (network view) */
+.lab-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.lab-section-title {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--lab-text-2);
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--lab-border);
+}
+
+.lab-network-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.lab-network-label {
+  font-size: 10px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.lab-wire-label  { color: var(--lab-red);   }
+.lab-plain-label { color: var(--lab-green); }
+
+.lab-pre {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1.5;
+  word-break: break-all;
+  white-space: pre-wrap;
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  min-height: 56px;
+  border: 1px solid transparent;
+}
+
+.lab-pre-wire  {
+  background: rgba(248,81,73,0.08);
+  color: #ffa8a4;
+  border-color: rgba(248,81,73,0.2);
+}
+
+.lab-pre-plain {
+  background: rgba(63,185,80,0.08);
+  color: #85e89d;
+  border-color: rgba(63,185,80,0.2);
+}
+
+.lab-error {
+  background: rgba(248,81,73,0.1);
+  border: 1px solid rgba(248,81,73,0.3);
+  border-radius: var(--radius-sm);
+  padding: 10px;
+  font-size: 12px;
+  color: #ffa8a4;
+  line-height: 1.5;
+}
+
+/* ==========================================================
+   MOBILE NAV BAR
+========================================================== */
+.mobile-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  z-index: 100;
+}
+
+.mobile-nav-btn {
+  flex: 1;
+  padding: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-2);
+  transition: color 0.1s;
+  text-align: center;
+}
+
+.mobile-nav-btn.active {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ==========================================================
+   RESPONSIVE — MOBILE (< 700px)
+========================================================== */
+@media (max-width: 699px) {
+  html, body { height: 100%; overflow: hidden; }
+
+  .app {
+    display: block;
+    height: 100dvh;
+    position: relative;
+  }
+
+  /* All three panels fill the screen, stacked, hidden by default */
+  .sidebar,
+  .chat-panel,
+  .crypto-lab {
+    position: absolute;
+    inset: 0;
+    bottom: 49px; /* leave room for mobile nav */
+    width: 100%;
+    height: auto;
+    border: none;
+    overflow: hidden;
+    display: none;
+  }
+
+  /* Show whichever panel is active */
+  .sidebar.mobile-active    { display: flex; }
+  .chat-panel.mobile-active { display: flex; }
+  .crypto-lab.mobile-active { display: flex; }
+
+  /* Lab hidden class does nothing on mobile */
+  .app.lab-hidden { display: block; }
+  .crypto-lab.lab-hidden { display: none; }
+  .crypto-lab.lab-hidden.mobile-active { display: flex; }
+
+  /* Nav visible on mobile */
+  .mobile-nav { display: flex; }
+
+  /* Composer doesn't need fixed positioning on mobile */
+  .composer { position: static; width: 100%; }
+
+  /* Back button visible on mobile */
+  .back-btn { display: flex; }
+
+  /* Toggle lab button hidden on mobile (nav handles it) */
+  .toggle-lab-btn { display: none; }
+
+  /* Network grid stacks */
+  .lab-network-grid { grid-template-columns: 1fr; }
+}
+
+/* ==========================================================
+   RESPONSIVE — TABLET (700px - 1023px)
+   2-column: sidebar + chat, no lab by default
+========================================================== */
+@media (min-width: 700px) and (max-width: 1023px) {
+  .app {
+    grid-template-columns: 220px 1fr 0;
+  }
+
+  .crypto-lab {
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 320px;
+    z-index: 50;
+    transform: translateX(100%);
+    transition: transform 0.25s ease;
+  }
+
+  .crypto-lab:not(.lab-hidden) {
+    transform: translateX(0);
+  }
+
+  .back-btn { display: flex; }
+}
+
+/* ==========================================================
+   RESPONSIVE — DESKTOP (>= 1024px)
+========================================================== */
+@media (min-width: 1024px) {
+  .back-btn { display: none; }
+  .mobile-nav { display: none !important; }
+}

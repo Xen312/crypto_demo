@@ -1,0 +1,45 @@
+# =========================
+# Node.js
+# =========================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# =========================
+# Environment / Secrets
+# =========================
+.env
+.env.*
+*.pem
+*.key
+*.crt
+
+# =========================
+# OS / Editor junk
+# =========================
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# =========================
+# Runtime data
+# =========================
+logs/
+*.log
+
+# =========================
+# Build / cache
+# =========================
+.cache/
+dist/
+build/
+
+# =========================
+# Temporary files
+# =========================
+tmp/
+temp/
