@@ -15,6 +15,7 @@ import {
   computeSharedSecret,
   deriveAESKeyHKDF,
   encryptAESGCM,
+  decryptAESGCM,
 } from "./crypto.service.js";
 
 /* ==================================================
@@ -26,10 +27,11 @@ import {
    4.  Derive AES key via HKDF-SHA256
    5.  Log chat secret once   → CHAT_SECRETS
    6.  Encrypt with AES-256-GCM
-   7.  Log encrypted message  → ENCRYPTED_MESSAGES
-   8.  Log network traffic    → NETWORK_TRAFFIC
-   9.  Save plaintext message → MESSAGES
-   10. Return crypto trace    → sent back to the browser (Crypto Lab)
+   7.  Decrypt with AES-256-GCM (verification round-trip)
+   8.  Log encrypted message  → ENCRYPTED_MESSAGES
+   9.  Log network traffic    → NETWORK_TRAFFIC
+   10. Save plaintext message → MESSAGES
+   11. Return crypto trace    → sent back to the browser (Crypto Lab)
 ================================================== */
 
 export async function processMessage({ msg, userKeys }) {
@@ -101,7 +103,19 @@ export async function processMessage({ msg, userKeys }) {
   /* ── 6. Encrypt ── */
   const encrypted = encryptAESGCM(aesKey, text);
 
-  /* ── 7 & 8. Log encrypted message and network traffic ── */
+  /* ── 7. Decrypt (verification round-trip) ──
+     The receiver uses the same shared AES key plus the IV and auth tag
+     transmitted alongside the ciphertext to recover the original plaintext.
+     If the ciphertext or auth tag were altered in transit, decryptAESGCM
+     throws and the message is rejected — this is AES-GCM's integrity guarantee. */
+  const decryptedText = decryptAESGCM(
+    aesKey,
+    encrypted.iv,
+    encrypted.ciphertext,
+    encrypted.authTag
+  );
+
+  /* ── 8 & 9. Log encrypted message and network traffic ── */
   await logEncryptedMessage({
     chat_id,
     sender:     sender_id,
@@ -113,10 +127,10 @@ export async function processMessage({ msg, userKeys }) {
 
   await logNetworkTraffic({ direction: "outbound", payload: encrypted.ciphertext });
 
-  /* ── 9. Persist plaintext for chat history ── */
+  /* ── 10. Persist plaintext for chat history ── */
   await saveMessage({ ...msg, timestamp: readableTimestamp });
 
-  /* ── 10. Return full crypto trace for the Crypto Lab panel ── */
+  /* ── 11. Return full crypto trace for the Crypto Lab panel ── */
   return {
     cryptoTrace: {
       plaintext:         text,
@@ -127,6 +141,7 @@ export async function processMessage({ msg, userKeys }) {
       iv:                encrypted.iv,
       ciphertext:        encrypted.ciphertext,
       authTag:           encrypted.authTag,
+      decryptedText,
     },
   };
 }

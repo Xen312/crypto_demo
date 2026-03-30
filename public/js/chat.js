@@ -140,14 +140,15 @@ function renderTrace(trace) {
   }
 
   const steps = [
-    { n: 1, name: "Plaintext",          desc: "Original message before encryption",        val: trace.plaintext,                   cls: "step-green"  },
-    { n: 2, name: "Sender public key",  desc: "X25519 SPKI — safe to share",               val: trunc(trace.senderPublicKey, 80),  cls: "step-blue"   },
-    { n: 3, name: "Receiver public key",desc: "X25519 SPKI — safe to share",               val: trunc(trace.receiverPublicKey, 80),cls: "step-blue"   },
-    { n: 4, name: "Shared secret",      desc: "ECDH result — never sent over the network", val: trace.sharedSecret,                cls: "step-orange" },
-    { n: 5, name: "AES-256 key",        desc: "Derived from shared secret via HKDF-SHA256",val: trace.aesKey,                      cls: "step-orange" },
-    { n: 6, name: "IV / Nonce",         desc: "12 random bytes, unique per message",        val: trace.iv,                          cls: "step-purple" },
-    { n: 7, name: "Ciphertext",         desc: "AES-256-GCM encrypted output",               val: trace.ciphertext,                  cls: "step-red"    },
-    { n: 8, name: "Auth tag",           desc: "GCM integrity check",                        val: trace.authTag,                     cls: "step-red"    },
+    { n: 1, name: "Plaintext",           desc: "Original message before encryption",         val: trace.plaintext,                   cls: "step-green"  },
+    { n: 2, name: "Sender public key",   desc: "X25519 SPKI — safe to share",                val: trunc(trace.senderPublicKey, 80),  cls: "step-blue"   },
+    { n: 3, name: "Receiver public key", desc: "X25519 SPKI — safe to share",                val: trunc(trace.receiverPublicKey, 80),cls: "step-blue"   },
+    { n: 4, name: "Shared secret",       desc: "ECDH result — never sent over the network",  val: trace.sharedSecret,                cls: "step-orange" },
+    { n: 5, name: "AES-256 key",         desc: "Derived from shared secret via HKDF-SHA256", val: trace.aesKey,                      cls: "step-orange" },
+    { n: 6, name: "IV / Nonce",          desc: "12 random bytes, unique per message",         val: trace.iv,                          cls: "step-purple" },
+    { n: 7, name: "Ciphertext",          desc: "AES-256-GCM encrypted output",                val: trace.ciphertext,                  cls: "step-red"    },
+    { n: 8, name: "Auth tag",            desc: "GCM integrity check",                         val: trace.authTag,                     cls: "step-red"    },
+    { n: 9, name: "Decrypted plaintext", desc: "Receiver recovers original message",          val: trace.decryptedText,               cls: "step-green"  },
   ];
 
   labSteps.classList.remove("hidden");
