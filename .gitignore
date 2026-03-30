@@ -11,6 +11,7 @@ yarn-error.log*
 # =========================
 .env
 .env.*
+!.env.example
 *.pem
 *.key
 *.crt
@@ -43,3 +44,9 @@ build/
 # =========================
 tmp/
 temp/
+
+# =========================
+# Local shell shims
+# =========================
+node.cmd
+npm.cmd

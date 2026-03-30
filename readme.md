@@ -39,10 +39,12 @@ node server.js
 
 ## Environment Setup
 
-Copy `.env.example` to `.env` and fill in four values:
+Copy `.env.example` to `.env` and fill in these required values:
 
 ```env
+APP_URL=http://localhost:8080
 GOOGLE_CLIENT_ID=...
+GOOGLE_CLIENT_SECRET=...
 SERVICE_ACCOUNT_EMAIL=...
 SERVICE_ACCOUNT_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n..."
 SPREADSHEET_ID=...
@@ -55,6 +57,16 @@ SPREADSHEET_ID=...
 2. Create an OAuth 2.0 Client ID (Web Application type)
 3. Add `http://localhost:8080` to Authorised JavaScript Origins
 4. Copy the Client ID
+
+**GOOGLE_CLIENT_SECRET**
+1. Open the same OAuth 2.0 Client in Google Cloud Console
+2. Copy the Client Secret
+
+**APP_URL**
+1. Set this to your app's public URL (no trailing slash)
+2. Local dev example: `http://localhost:8080`
+3. Render example: `https://your-app-name.onrender.com`
+4. Add `${APP_URL}/auth/google/callback` to Authorized redirect URIs
 
 **SERVICE_ACCOUNT_EMAIL + SERVICE_ACCOUNT_PRIVATE_KEY**
 1. Still in Google Cloud → IAM & Admin → Service Accounts
@@ -88,13 +100,13 @@ Send a second message and read through the steps on the right. Walk through each
 - Why do we run HKDF on the shared secret instead of using it directly?
 - What's the IV for? What happens if you reuse it?
 
-### Step 3 — Enable Tamper Mode
-Click the **🔥 Tamper Mode: OFF** button in the Crypto Lab header. Send a message.
+### Step 3 — Explain integrity with the Auth Tag
+Point to the **Auth tag** step in the Crypto Lab panel and explain:
+- AES-GCM verifies integrity during decrypt
+- If ciphertext or auth tag is modified, decryption fails
+- This is why the message cannot be silently altered in transit
 
-The panel now shows an extra section: it takes the real auth tag, flips one byte, and tries to decrypt with the broken tag. The decryption fails with:
-> `Unsupported state or unable to authenticate data`
-
-This is AES-GCM's tamper detection working. Ask students: *"What would happen in a system that used plain AES-CBC instead of GCM?"*
+Ask students: *"What would happen in a system that used plain AES-CBC instead of GCM?"*
 
 ### Step 4 — Compare the Network View
 Point to the **📡 What the network sees** section. The left column is what a passive eavesdropper captures. The right column is what the recipient reads. They're completely different.

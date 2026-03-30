@@ -25,6 +25,7 @@ const sheets = google.sheets({
    B: username
    C: picture
    D: email
+   E: username_set
 ========================= */
 
 export async function createUser({ google_id, username, picture, email }) {
@@ -41,7 +42,7 @@ export async function createUser({ google_id, username, picture, email }) {
 export async function getUserByGoogleId(google_id) {
   const res = await sheets.spreadsheets.values.get({
     spreadsheetId: ENV.SPREADSHEET_ID,
-    range: "USERS!A2:D"
+    range: "USERS!A2:E"
   });
 
   const rows = res.data.values || [];
@@ -54,7 +55,7 @@ export async function getUserByGoogleId(google_id) {
     username: row[1],
     picture: row[2],
     email: row[3],
-    username_set: row[4] === true || row[4] === "TRUE"
+    username_set: row[4] === true || row[4] === "TRUE" || row[4] === "true"
   };
 }
 
