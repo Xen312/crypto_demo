@@ -17,39 +17,6 @@ const closeLabBtn  = document.getElementById("closeLabBtn");
 const cryptoLab    = document.getElementById("cryptoLab");
 const app          = document.getElementById("app");
 
-const labResizeHandle = document.getElementById("labResizeHandle");
-
-/* ── Desktop resize for Crypto Lab ── */
-let isResizing = false;
-
-const MIN_LAB_WIDTH = 280;
-const MAX_LAB_WIDTH = 700;
-
-labResizeHandle?.addEventListener("mousedown", () => {
-  if (window.innerWidth < 700) return;
-
-  isResizing = true;
-  document.body.classList.add("resizing");
-});
-
-window.addEventListener("mousemove", e => {
-  if (!isResizing) return;
-
-  const width = window.innerWidth - e.clientX;
-
-  const clampedWidth = Math.max(
-    MIN_LAB_WIDTH,
-    Math.min(MAX_LAB_WIDTH, width)
-  );
-
-  app.style.setProperty("--lab-width", `${clampedWidth}px`);
-});
-
-window.addEventListener("mouseup", () => {
-  isResizing = false;
-  document.body.classList.remove("resizing");
-});
-
 function showLab() {
   cryptoLab.classList.remove("lab-hidden");
   app.classList.remove("lab-hidden");

@@ -122,13 +122,10 @@ input {
    APP LAYOUT — desktop 3-column
 ========================================================== */
 .app {
-  --lab-width: 340px;
-
   display: grid;
-  grid-template-columns: 240px 1fr var(--lab-width);
+  grid-template-columns: 240px 1fr 340px;
   height: 100vh;
   overflow: hidden;
-  position: relative;
 }
 
 /* ==========================================================
@@ -246,37 +243,6 @@ input {
   flex-direction: column;
   background: var(--bg);
   overflow: hidden;
-}
-
-/* ==========================================================
-   RESIZABLE CRYPTO LAB
-========================================================== */
-.lab-resize-handle {
-  width: 6px;
-  cursor: col-resize;
-  background: transparent;
-  position: relative;
-  z-index: 20;
-  transition: background 0.15s ease;
-}
-
-.lab-resize-handle:hover {
-  background: rgba(37, 99, 235, 0.15);
-}
-
-.lab-resize-handle::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 2px;
-  width: 2px;
-  height: 100%;
-  background: var(--border);
-}
-
-body.resizing {
-  cursor: col-resize;
-  user-select: none;
 }
 
 .chat-header {
@@ -708,10 +674,6 @@ body.resizing {
     display: block;
     height: 100dvh;
     position: relative;
-  }
-
-  .lab-resize-handle {
-    display: none;
   }
 
   /* All three panels fill the screen, stacked, hidden by default */
